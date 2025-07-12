@@ -1,0 +1,51 @@
+.home {
+  padding-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(135deg, #e0e7ff 0%, #f0f9ff 100%);
+  padding-bottom: 40px;
+}
+
+.heading {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #1e3a8a;
+  margin-bottom: 2rem;
+  letter-spacing: 1px;
+  text-align: center;
+  text-shadow: 0 2px 8px rgba(59, 130, 246, 0.08);
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #4b5563;
+  margin-bottom: 2rem;
+  text-align: center;
+  max-width: 600px;
+  line-height: 1.6;
+}
+
+.loginLink {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.loginLink:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+.registerLink {
+  color: #059669;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.registerLink:hover {
+  color: #047857;
+  text-decoration: underline;
+}
