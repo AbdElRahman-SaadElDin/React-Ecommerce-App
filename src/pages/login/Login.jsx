@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useLocation, useBlocker } from "react-router-dom";
 import { useAuth } from "../../context/UserContext/UserContext";
@@ -19,6 +19,7 @@ function Login() {
   const from = location.state?.from?.pathname || "/";
 
   const watchedValues = watch();
+  const justLoggedIn = useRef(false);
 
   const isFormDirty = () => {
     const hasChanges = isDirty;
@@ -30,7 +31,9 @@ function Login() {
 
   const blocker = useBlocker(({ currentLocation, nextLocation }) => {
     const shouldBlock =
-      isFormDirty() && currentLocation.pathname !== nextLocation.pathname;
+      !justLoggedIn.current &&
+      isFormDirty() &&
+      currentLocation.pathname !== nextLocation.pathname;
     console.log("Login Blocker check:", {
       isDirty: isDirty,
       hasContent:
@@ -61,6 +64,7 @@ function Login() {
     const success = login(data.email, data.password);
     if (success) {
       alert("Login successful!");
+      justLoggedIn.current = true;
       navigate(from, { replace: true });
     } else {
       alert("Invalid email or password!");

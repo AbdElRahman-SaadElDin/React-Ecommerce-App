@@ -1,11 +1,16 @@
 import { useCart } from "../../context/CartContext/CartContext";
 import styles from "./ProductCard.module.css";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addWishlist, removeWishlist } from "../../store/wishlistSlice";
 
-function ProductCard({ product, onAddToShortList }) {
+function ProductCard({ product }) {
   const { addToCart, increaseQuantity, decreaseQuantity, cartItems } =
     useCart();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const wishlistItems = useSelector((state) => state.wishlist.wishlistItems);
+  const isInWishlist = wishlistItems.some((item) => item.id === product.id);
 
   const cartItem = cartItems.find((item) => item.id === product.id);
 
@@ -29,9 +34,11 @@ function ProductCard({ product, onAddToShortList }) {
     navigate(`/details/${product.id}`);
   };
 
-  const handleAddToShortList = () => {
-    if (onAddToShortList) {
-      onAddToShortList(product.title);
+  const handleWishlistToggle = () => {
+    if (isInWishlist) {
+      dispatch(removeWishlist(product.id));
+    } else {
+      dispatch(addWishlist(product));
     }
   };
 
@@ -83,10 +90,14 @@ function ProductCard({ product, onAddToShortList }) {
           )}
 
           <button
-            onClick={handleAddToShortList}
-            className={styles.shortListBtn}
+            className={
+              isInWishlist
+                ? `${styles.shortListBtn} ${styles.removeFromWishlistBtn}`
+                : styles.shortListBtn
+            }
+            onClick={handleWishlistToggle}
           >
-            Add Short List
+            {isInWishlist ? "Remove from Wish List" : "Add Wish List"}
           </button>
         </div>
       </div>

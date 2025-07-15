@@ -85,14 +85,15 @@
 
 .counter {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
-  gap: 12px;
+  gap: 8px;
   width: 100%;
-  padding: 8px 16px;
+  padding: 0;
   background-color: #f8fafc;
   border: 1px solid #e2e8f0;
   border-radius: 6px;
+  height: 32px;
 }
 
 .counterBtn {
@@ -100,12 +101,15 @@
   color: white;
   border: none;
   border-radius: 4px;
-  padding: 4px 10px;
+  padding: 0;
   font-size: 1.1rem;
   cursor: pointer;
   font-weight: bold;
   transition: background 0.2s;
-  min-width: 32px;
+  min-width: 35%;
+  width: 35%;
+  height: 100%;
+  display: block;
 }
 
 .counterBtn:disabled {
@@ -114,10 +118,11 @@
 }
 
 .counterValue {
-  font-size: 1.1rem;
+  font-size: 1.125rem;
   font-weight: bold;
-  min-width: 20px;
+  min-width: 24%;
   text-align: center;
+  margin: auto 0;
 }
 
 .buttonContainer {
@@ -140,4 +145,12 @@
 
 .shortListBtn:hover {
   background-color: #059669;
+}
+
+.removeFromWishlistBtn {
+  background-color: #ef4444; /* red-500 */
+}
+
+.removeFromWishlistBtn:hover {
+  background-color: #b91c1c; /* red-700 */
 }

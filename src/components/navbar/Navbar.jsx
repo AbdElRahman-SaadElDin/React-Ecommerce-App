@@ -3,10 +3,12 @@ import { useAuth } from "../../context/UserContext/UserContext";
 import { NavLink } from "react-router-dom";
 import styles from "./Navbar.module.css";
 import { ShoppingCart } from "lucide-react";
+import { useSelector } from "react-redux";
 
 function Navbar() {
   const { cartCount } = useCart();
   const { isLogin, currentUser, logout } = useAuth();
+  const wishlistCount = useSelector((state) => state.wishlist.totalCount);
 
   const handleLogout = () => {
     logout();
@@ -59,6 +61,20 @@ function Navbar() {
           <ShoppingCart size={24} />
           {cartCount > 0 && (
             <span className={styles.cartBadge}>{cartCount}</span>
+          )}
+        </NavLink>
+
+        <NavLink
+          to="/wishlist"
+          className={({ isActive }) =>
+            isActive ? `${styles.cartIcon} ${styles.active}` : styles.cartIcon
+          }
+        >
+          <span role="img" aria-label="wishlist">
+            ❤️
+          </span>
+          {wishlistCount > 0 && (
+            <span className={styles.cartBadge}>{wishlistCount}</span>
           )}
         </NavLink>
       </div>

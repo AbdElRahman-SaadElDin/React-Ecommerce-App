@@ -7,18 +7,14 @@ import image from "../../assets/sorry-item-not-found.png";
 function ProductList() {
   const [productList, setProductList] = useState([]);
   const [query, setQuery] = useState("");
-  const [loading, setLoading] = useState(false);
 
   const callApi = async (searchQuery = "") => {
     try {
-      setLoading(true);
       const res = await axiosInstance.get(`search?q=${searchQuery}`);
       setProductList(res?.data?.products || []);
     } catch (err) {
       console.error("Error fetching products:", err);
       setProductList([]);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -29,10 +25,6 @@ function ProductList() {
 
   const handleInputChange = (e) => {
     setQuery(e.target.value);
-  };
-
-  const handleAddToShortList = (productName) => {
-    alert(` ${productName} added to ShortList`);
   };
 
   useEffect(() => {
@@ -61,11 +53,7 @@ function ProductList() {
         <div className={styles.container}>
           {productList.length > 0 ? (
             productList.map((product) => (
-              <ProductCard
-                key={product.id}
-                product={product}
-                onAddToShortList={handleAddToShortList}
-              />
+              <ProductCard key={product.id} product={product} />
             ))
           ) : (
             <div className={styles.noResults}>

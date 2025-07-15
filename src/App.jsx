@@ -8,6 +8,7 @@ import Register from "./pages/register/Register";
 import CartPage from "./pages/cart/CartPage";
 import ProtectedRoute from "./routes/ProtectedRoute.jsx";
 import NotFound from "./pages/notfound/NotFound";
+import WishlistPage from "./pages/wishlist/WishlistPage";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
             <CartPage />
           </ProtectedRoute>
         ),
+      },
+      {
+        path: "wishlist",
+        element: <WishlistPage />,
       },
     ],
   },

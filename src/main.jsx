@@ -5,15 +5,19 @@ import App from "./App.jsx";
 import { CartProvider } from "./context/CartContext/CartContext.jsx";
 import { AuthProvider } from "./context/UserContext/UserContext.jsx";
 import { LoadingProvider } from "./context/LoadingContext/LoadingContext.jsx";
+import { Provider } from "react-redux";
+import { store } from "./store/store";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <LoadingProvider>
-      <AuthProvider>
-        <CartProvider>
-          <App />
-        </CartProvider>
-      </AuthProvider>
-    </LoadingProvider>
+    <Provider store={store}>
+      <LoadingProvider>
+        <AuthProvider>
+          <CartProvider>
+            <App />
+          </CartProvider>
+        </AuthProvider>
+      </LoadingProvider>
+    </Provider>
   </StrictMode>
 );

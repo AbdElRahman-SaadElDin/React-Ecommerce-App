@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import { useNavigate, useBlocker } from "react-router-dom";
 import { useAuth } from "../../context/UserContext/UserContext";
@@ -25,6 +25,8 @@ function Register() {
   const { register: registerUser } = useAuth();
   const navigate = useNavigate();
 
+  const justRegistered = useRef(false);
+
   const watchedValues = watch();
 
   const isFormDirty = () => {
@@ -43,7 +45,9 @@ function Register() {
 
   const blocker = useBlocker(({ currentLocation, nextLocation }) => {
     const shouldBlock =
-      isFormDirty() && currentLocation.pathname !== nextLocation.pathname;
+      !justRegistered.current &&
+      isFormDirty() &&
+      currentLocation.pathname !== nextLocation.pathname;
 
     console.log("Blocker check:", {
       isDirty: isDirty,
@@ -102,6 +106,7 @@ function Register() {
     };
 
     registerUser(filteredData);
+    justRegistered.current = true;
     alert("Registration successful! Please login.");
     navigate("/login");
   };
